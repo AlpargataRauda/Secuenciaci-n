@@ -1,0 +1,6 @@
+Sample	Passed Filter	Low Quality	Too Many N	Low Complexity	Too Short	Too Long
+AbrahamSimpson	0.0	0.0	0.0	nan	0.0	0.0
+BartSimpson	2638.0	0.0	0.0	nan	18.0	0.0
+HomerSimpson	2618.0	0.0	0.0	nan	22.0	0.0
+LisaSimpson	2622.0	0.0	0.0	nan	18.0	0.0
+MaggieSimpson	2638.0	0.0	0.0	nan	18.0	0.0
