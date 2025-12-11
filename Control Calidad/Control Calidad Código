@@ -1,1 +1,36 @@
 Código Control de Calidad
+
+#Crear el entorno con los paquetes de conda que necesitamos#
+conda create -n ActSec -c bioconda -c conda-forge -c defaults -c r fastqc fastp multiqc 
+salmon bioconductor-deseq2
+
+#Nota: he intentado hacer esto, parecia que funcionaba pero luego me ha tocado ir instalando
+los paquetes a medida que los ejecutaba con comando: sudo apt install ____ Pero bueno mas alla
+de eso funciona
+
+#Activar entorno#
+conda activate ActSec 
+
+#Crear los directorios#
+mkdir -p Calidad/Crudo Calidad/Filtrados TrimmedAct
+
+#Evaluar la calidad d los datos en crudo#
+fastqc *fastq.gz -o Calidad/Crudo
+
+#Listar los archivos en un archivo.txt para que se puede acceder desde el bucle#
+ls *fastq.gz | cut -d _ -f 1 | sort -u > muestras.txt
+
+#Filtramos#
+for i in $(cat muestras.txt); do fastp --in1 $i*R1* --in2 $i*R2* --out1 TrimmedAct/$i"_R1_filtered.fastq.gz" 
+--out2 TrimmedAct/$i"_R2_filtered.fastq.gz" --detect_adapter_for_pe --cut_front --cut_tail 
+--cut_window_size 12 --cut_mean_quality 30 --length_required 35 --json Trimmed/$i.json --html Trimmed/$i.html 
+--thread 32; done
+
+#Evaluamos caliad de los filtrados#
+fastqc TrimmedAct/*fastq.gz -o Calidad/Filtrados --threads 32
+
+#Hacemos MultiQC de todo lo que hay en la Carpeta Calidad#
+multiqc Calidad
+
+
+
