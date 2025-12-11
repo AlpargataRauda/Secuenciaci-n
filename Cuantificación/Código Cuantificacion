@@ -1,1 +1,5 @@
-bu
+#Pasar los fastq.gz a FASTA#
+mkdir FASTA
+for i in TrimmedAct/*fastq.gz; do   
+gunzip -c "$i" | seqtk seq -a > "FASTA/$(basename "${i%.fastq.gz}.fasta")"; done
+
