@@ -1,0 +1,8 @@
+TallerGrupal_Ficheros/Fastqs/AbrahamSimpson_
+TallerGrupal_Ficheros/Fastqs/BartSimpson_
+TallerGrupal_Ficheros/Fastqs/HomerSimpson_
+TallerGrupal_Ficheros/Fastqs/LisaSimpson_
+TallerGrupal_Ficheros/Fastqs/MaggieSimpson_
+TallerGrupal_Ficheros/Fastqs/MargeSimpson_
+TallerGrupal_Ficheros/Fastqs/PattyBouvier_
+TallerGrupal_Ficheros/Fastqs/SelmaBouvier_
