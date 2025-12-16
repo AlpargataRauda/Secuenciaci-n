@@ -3,3 +3,17 @@ mkdir FASTA
 for i in TrimmedAct/*fastq.gz; do   
 gunzip -c "$i" | seqtk seq -a > "FASTA/$(basename "${i%.fastq.gz}.fasta")"; done
 
+
+#Antes de cuantificar se debe hacer un índice con salmon de una secuencia de referencia
+para que salmon pueda hacer la cuantificacion comparando con esta referencia.
+
+
+#Nota: 
+En Salmon, los parámetros son:
+
+-t → input, es decir, el archivo FASTA del transcriptoma que quieres indexar
+
+-i → output, es decir, la carpeta donde Salmon va a guardar el índice creado
+
+Entonces aunque uses -i, no estás diciendo “input”, sino “índice de salida”.
+
