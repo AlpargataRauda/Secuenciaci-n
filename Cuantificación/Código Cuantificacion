@@ -17,3 +17,7 @@ En Salmon, los parámetros son:
 
 Entonces aunque uses -i, no estás diciendo “input”, sino “índice de salida”.
 
+#Crear el indice con la secuencia de referencia
+salmon index -t Referencia.fasta -i Cuantificacion/Indice
+
+#Nota: cuando no se especifica -k (numero de K-meros) salmon introduce -k 31 por defecto
