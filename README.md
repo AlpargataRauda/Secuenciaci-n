@@ -87,3 +87,5 @@ salmon quant -i Indexado/ -l A -1 Trimmed/MaggieSimpson_R1_filtered.fastq.gz -2 
 ## #17 Instalamos DEseq2 en Rstudio usando el código (ojo, hay que tener instalado previamente BiocManager): 
 
 BiocManager::install("DESeq2")
+
+## #18 Usar el scritp /Chema/Script \ DESeq2 para hacer el DESeq2
