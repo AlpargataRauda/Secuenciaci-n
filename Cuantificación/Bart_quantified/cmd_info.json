@@ -1,0 +1,9 @@
+{
+    "salmon_version": "1.10.3",
+    "index": "Cuantificacion/Indice/",
+    "libType": "A",
+    "mates1": "TrimmedAct/BartSimpson_R1_filtered.fastq.gz",
+    "mates2": "TrimmedAct/BartSimpson_R2_filtered.fastq.gz",
+    "output": "Cuantificacion/BartSimpson_quantified",
+    "auxDir": "aux_info"
+}
