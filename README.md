@@ -88,4 +88,4 @@ salmon quant -i Indexado/ -l A -1 Trimmed/MaggieSimpson_R1_filtered.fastq.gz -2 
 
 BiocManager::install("DESeq2")
 
-## #18 Usar el scritp /Chema/Script \ DESeq2 para hacer el DESeq2
+## #18 Usar el [script DESeq2](https://github.com/AlpargataRauda/Secuenciaci-n/blob/Chema/Chema/Script%20DESeq2.R) para hacer el DESeq2
