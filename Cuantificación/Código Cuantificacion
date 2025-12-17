@@ -21,3 +21,11 @@ Entonces aunque uses -i, no estás diciendo “input”, sino “índice de sali
 salmon index -t Referencia.fasta -i Cuantificacion/Indice
 
 #Nota: cuando no se especifica -k (numero de K-meros) salmon introduce -k 31 por defecto
+
+Ejecutamos los siguientes códigos para todos los archhivos fastq.gz (paired)
+
+salmon quant -i Cuantificacion/Indice/ 
+-l A 
+-1 TrimmedAct/HomerSimpson_R1_filtered.fastq.gz 
+-2 TrimmedAct/HomerSimpson_R2_filtered.fastq.gz 
+-o Cuantificacion/HomerSimpson_quantified
