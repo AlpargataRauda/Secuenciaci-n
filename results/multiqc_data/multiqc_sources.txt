@@ -1,0 +1,11 @@
+Module	Section	Sample Name	Source
+FastQC	all_sections	AbrahamSimpson_R1	/home/josecelada/master_bioinfo/actividad2_rnaseq/results/fastqc_raw/AbrahamSimpson_R1_fastqc.zip
+FastQC	all_sections	AbrahamSimpson_R2	/home/josecelada/master_bioinfo/actividad2_rnaseq/results/fastqc_raw/AbrahamSimpson_R2_fastqc.zip
+FastQC	all_sections	BartSimpson_R1	/home/josecelada/master_bioinfo/actividad2_rnaseq/results/fastqc_raw/BartSimpson_R1_fastqc.zip
+FastQC	all_sections	BartSimpson_R2	/home/josecelada/master_bioinfo/actividad2_rnaseq/results/fastqc_raw/BartSimpson_R2_fastqc.zip
+FastQC	all_sections	HomerSimpson_R1	/home/josecelada/master_bioinfo/actividad2_rnaseq/results/fastqc_raw/HomerSimpson_R1_fastqc.zip
+FastQC	all_sections	HomerSimpson_R2	/home/josecelada/master_bioinfo/actividad2_rnaseq/results/fastqc_raw/HomerSimpson_R2_fastqc.zip
+FastQC	all_sections	LisaSimpson_R1	/home/josecelada/master_bioinfo/actividad2_rnaseq/results/fastqc_raw/LisaSimpson_R1_fastqc.zip
+FastQC	all_sections	LisaSimpson_R2	/home/josecelada/master_bioinfo/actividad2_rnaseq/results/fastqc_raw/LisaSimpson_R2_fastqc.zip
+FastQC	all_sections	MaggieSimpson_R1	/home/josecelada/master_bioinfo/actividad2_rnaseq/results/fastqc_raw/MaggieSimpson_R1_fastqc.zip
+FastQC	all_sections	MaggieSimpson_R2	/home/josecelada/master_bioinfo/actividad2_rnaseq/results/fastqc_raw/MaggieSimpson_R2_fastqc.zip
