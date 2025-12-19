@@ -1,0 +1,11 @@
+{
+    "salmon_version": "1.10.3",
+    "index": "references/salmon_index",
+    "libType": "A",
+    "mates1": "results/cleaned_data/HomerSimpson_R1_clean.fastq.gz",
+    "mates2": "results/cleaned_data/HomerSimpson_R2_clean.fastq.gz",
+    "threads": "4",
+    "validateMappings": [],
+    "output": "results/salmon_quant/HomerSimpson_quant",
+    "auxDir": "aux_info"
+}
