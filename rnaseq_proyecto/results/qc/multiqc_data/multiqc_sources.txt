@@ -1,0 +1,17 @@
+Module	Section	Sample Name	Source
+FastQC	all_sections	AbrahamSimpson_R1	/Users/fgoiri/Desktop/rnaseq_proyecto/results/qc/AbrahamSimpson_R1_fastqc.zip
+FastQC	all_sections	AbrahamSimpson_R2	/Users/fgoiri/Desktop/rnaseq_proyecto/results/qc/AbrahamSimpson_R2_fastqc.zip
+FastQC	all_sections	BartSimpson_R1	/Users/fgoiri/Desktop/rnaseq_proyecto/results/qc/BartSimpson_R1_fastqc.zip
+FastQC	all_sections	BartSimpson_R2	/Users/fgoiri/Desktop/rnaseq_proyecto/results/qc/BartSimpson_R2_fastqc.zip
+FastQC	all_sections	HomerSimpson_R1	/Users/fgoiri/Desktop/rnaseq_proyecto/results/qc/HomerSimpson_R1_fastqc.zip
+FastQC	all_sections	HomerSimpson_R2	/Users/fgoiri/Desktop/rnaseq_proyecto/results/qc/HomerSimpson_R2_fastqc.zip
+FastQC	all_sections	LisaSimpson_R1	/Users/fgoiri/Desktop/rnaseq_proyecto/results/qc/LisaSimpson_R1_fastqc.zip
+FastQC	all_sections	LisaSimpson_R2	/Users/fgoiri/Desktop/rnaseq_proyecto/results/qc/LisaSimpson_R2_fastqc.zip
+FastQC	all_sections	MaggieSimpson_R1	/Users/fgoiri/Desktop/rnaseq_proyecto/results/qc/MaggieSimpson_R1_fastqc.zip
+FastQC	all_sections	MaggieSimpson_R2	/Users/fgoiri/Desktop/rnaseq_proyecto/results/qc/MaggieSimpson_R2_fastqc.zip
+FastQC	all_sections	MargeSimpson_R1	/Users/fgoiri/Desktop/rnaseq_proyecto/results/qc/MargeSimpson_R1_fastqc.zip
+FastQC	all_sections	MargeSimpson_R2	/Users/fgoiri/Desktop/rnaseq_proyecto/results/qc/MargeSimpson_R2_fastqc.zip
+FastQC	all_sections	PattyBouvier_R1	/Users/fgoiri/Desktop/rnaseq_proyecto/results/qc/PattyBouvier_R1_fastqc.zip
+FastQC	all_sections	PattyBouvier_R2	/Users/fgoiri/Desktop/rnaseq_proyecto/results/qc/PattyBouvier_R2_fastqc.zip
+FastQC	all_sections	SelmaBouvier_R1	/Users/fgoiri/Desktop/rnaseq_proyecto/results/qc/SelmaBouvier_R1_fastqc.zip
+FastQC	all_sections	SelmaBouvier_R2	/Users/fgoiri/Desktop/rnaseq_proyecto/results/qc/SelmaBouvier_R2_fastqc.zip
