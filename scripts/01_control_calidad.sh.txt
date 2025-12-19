@@ -1,0 +1,12 @@
+#!/bin/bash
+# Paso 1: Control de calidad de las lecturas crudas
+# Herramientas: FastQC y MultiQC
+
+# Crear carpetas
+mkdir -p results/fastqc_raw
+
+# Ejecutar FastQC
+fastqc data/*.fastq.gz -o results/fastqc_raw -t 4
+
+# Agrupar reportes con MultiQC
+multiqc results/fastqc_raw -o results/
