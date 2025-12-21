@@ -1,0 +1,43 @@
+#Hacemos una lista con los archivos .sf
+files <- list.files(
+  pattern = "\\.sf$", 
+  full.names = TRUE,
+)
+files
+
+#Importamos el archivo Transcrito_a_Gen
+tx2gene <- read.table("Transcrito_a_Gen.tsv")
+tx2gene<- as.data.frame(tx2gene)
+View(tx2gene)
+
+#El archivo Trtxanscrito_a_Gen relaciona transcritos y genes
+# Usando el archivo Transcrito_a_Gen.tvs y usando los archivos quant.sf que 
+#muestran el número de lecturas, longitud y abundancia de dichos 
+#transcritos crearemos una lista de data.frame que relacione el número de 
+#lecturas, abundancia y longitud de cada gen.
+
+txi.salmon <- tximport(files, type = "salmon", tx2gene = tx2gene)
+View(txi.salmon)
+
+Funciones principales de tximport
+1) Importa archivos de cuantificación
+Lee archivos como quant.sf (Salmon).
+tximport(files, type = "salmon")
+
+2)Convierte de transcritos a genes (opcional pero habitual)
+Usa una tabla tx2gene para agrupar transcritos en genes.
+tximport(files, type = "salmon", tx2gene = tx2gene)
+Esto evita hacer análisis a nivel de transcrito si el objetivo son genes.
+
+3)Ajusta los conteos por longitud
+Tiene en cuenta:
+Longitud del transcrito
+Sesgos de cuantificación
+Esto mejora la estimación de conteos para DESeq2.
+
+4) Devuelve un objeto listo para análisis
+El resultado es una lista con matrices:
+
+abundance → TPM
+counts → conteos estimados
+length → longitud efectiva
