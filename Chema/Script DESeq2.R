@@ -78,7 +78,7 @@ ntd <- normTransform(dds)
 meanSdPlot(assay(ntd))
 
 select <- order(rowMeans(counts(dds,normalized=TRUE)),
-                decreasing=TRUE)[1:20]
+                decreasing=TRUE)[1:10]
 df <- as.data.frame(colData(dds)[,"condition"])
 
 row.names(df) <- colnames(ntd)
@@ -114,3 +114,4 @@ ggplot(res_df, aes(x = log2FoldChange, y = -log10(padj))) +
   geom_hline(yintercept = -log10(0.05), linetype = "dashed")
 
 # Volcano Plot
+
