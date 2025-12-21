@@ -39,6 +39,7 @@ El análisis de expresión diferencial ha permitido aislar una firma molecular c
 Los resultados apuntan a una **obesidad monogénica** causada por la rotura del eje Adiposo-Cerebral. Los sujetos carecen de los mecanismos moleculares para regular la ingesta.
 
 ## Estructura del Repositorio
-* `/data`: Archivos de conteo resultantes de Salmon (quant.sf).
-* `/scripts`: Código R utilizado para el análisis diferencial y generación de gráficas.
-* `/results`: Tablas de genes diferencialmente expresados (.csv) y gráficos generados.
+* **`docs/`**: Documentación del proyecto y guías de referencia.
+* **`fastqc_raw/`**: Informes de calidad (*FastQC*) generados a partir de las lecturas crudas.
+* **`results/`**: Resultados del análisis, incluyendo tablas de genes diferenciales (`.csv`) y las gráficas generadas (PCA, Heatmap, Volcano Plot).
+* **`scripts/`**: Código fuente en R para el análisis diferencial (DESeq2) y scripts de Bash para el pre-procesamiento.
