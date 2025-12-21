@@ -47,12 +47,12 @@ plotPCA(rld, intgroup="condition") +
   ggtitle("PCA: Obesos vs Control") + 
   theme_minimal()
 
-top20 <- rownames(resOrdered)[1:20]
-mat <- assay(rld)[top20, ]
+top20 <- rownames(resOrdered)[1:10]
+mat <- assay(rld)[top10, ]
 mat <- mat - rowMeans(mat) 
 
 pheatmap(mat, annotation_col = samples["condition"], 
-         main = "Top 20 Genes Diferenciales",
+         main = "Top 10 Genes Diferenciales",
          color = colorRampPalette(c("navy", "white", "firebrick3"))(50))
 
 res_df <- as.data.frame(resOrdered)
