@@ -1,45 +1,44 @@
-# Secuenciacion
+# Actividad Grupal: Análisis de expresión diferencial de genes relacionados con la obesidad mediante RNA-seq
 
-Versión linux
+**Asignatura:** Secuenciación y Ómicas de Próxima Generación 
+**Máster:** Bioinformática y Bioestadística  
+**Grupo:** 10
+**Jesús Javier Amat Pamies, José Antonio Celada Guerrero, Fátima Goiri Presmanes, José María Sevilla Avendaño y Judit del Valle Molina**
 
-Requisitos previos: Tener instalado conda para linux en la consola wsl.
+## Contexto y Objetivos
+El objetivo principal de esta actividad ha sido caracterizar la base molecular de un fenotipo de obesidad mediante técnicas de **RNA-seq** buscando variantes de expresión génica que expliquen la alteración en la **homeostasis energética** de los sujetos afectados (obesidad) frente a los normopeso (controles).
 
-### #1 Me pongo en mi directorio de trabajo con:
+La finalidad última es proponer una estrategia de **Nutrición de Precisión**, identificando si el origen del fenotipo es ambiental o genético.
 
-cd /mnt/c/Users/chema/Desktop/Master \ bioinformatica/Secuenciación \ y \ Ómicas \ de \ Próxima Generación/Actividad \ 2/mubio03_act2
+## Diseño del Estudio
+Se ha trabajado con 5 muestras biológicas clasificadas en dos condiciones:
+* **Grupo Obeso:** AbrahamSimpson, HomerSimpson.
+* **Grupo Control:** BartSimpson, LisaSimpson, MaggieSimpson.
 
-### #2 Aquí creo mi entorno con los programas fastqc fastp y multiqc para usarlos en este entorno usando:
+## Flujo de Trabajo (Pipeline)
 
-conda create -n actividad2 -c bioconda -c conda-forge -c defaults -c r fastqc fastp multiqc bwa samtools=1.19 unicycler htslib openjdk=17 bandage quast qualimap prokka
+El análisis se ha estructurado en dos fases, combinando el procesamiento en línea de comandos y el análisis estadístico en R.
 
-### #3 Y nos metemos al entorno con: 
+### 1. Pre-procesamiento y Cuantificación (Bash)
+* **Control de Calidad:** Se filtraron las lecturas crudas eliminando aquellas con un *Phred Score* bajo (< Q20) para asegurar la fiabilidad de los datos.
+* **Alineamiento y Conteo:** Utilizamos **Salmon** para realizar una cuantificación libre de alineamiento (*alignment-free*), configurando 30 *bootstraps* para estimar la varianza técnica de las muestras.
 
-conda activate actividad2
+### 2. Análisis Estadístico y Reducción Dimensional (R)
+* **Integración:** Los datos se importaron a nivel de gen mediante `tximport`.
+* **Modelo Diferencial:** Se ajustó un modelo lineal generalizado con **DESeq2** (Wald test) para comparar las condiciones, aplicando un filtrado de significancia (p-adj < 0.05).
+* **Exploración:** Se aplicaron métodos de reducción dimensional (PCA) sobre los datos transformados con `rlog` para visualizar la agrupación de los **dietotipos** o perfiles de expresión.
 
-### #4 Creamos las carpetas /Quality/Raw,/Quality/Filtered y la carpeta /Trimmed usando el código:
-  
-mkdir -p Quality/Raw Quality/Filtered Trimmed
+## Resultados Clave
 
-### #5 Nos disponemos a hacer el control de calidad de las secuencias y metemos el resultado en la carpeta /Quality/Raw, para ello seleccionamos los ficheros fastq.gz que hay en la carpeta Fastqs y usamos el código:
+El análisis de expresión diferencial ha permitido aislar una firma molecular clara en el grupo obeso:
+1.   Se detectó una infraexpresión severa del gen de la leptina (**LEP**) junto con una sobreexpresión compensatoria de su receptor (**LEPR**).
+2.   El gen **NTRK2** (receptor TrkB), esencial para la sensación de saciedad en el hipotálamo, aparece silenciado.
+3.   El *Heatmap* de los Top 10 genes y el *Volcano Plot* confirman que estos genes son los principales responsables de la varianza biológica entre los grupos.
 
-fastqc TallerGrupal_Ficheros/Fastqs/*fastq.gz -o Quality/Raw -t 32
+## Conclusiones
+Los resultados apuntan a una **obesidad monogénica** causada por la rotura del eje Adiposo-Cerebral. Los sujetos carecen de los mecanismos moleculares para regular la ingesta.
 
-### #6 Para hacer el control de calidad mediante el programa fastq usamos el siguiente código y metemos el resultado en /Trimmed. Para ello necesitamos los archivos R1 y R2 de cada Simpson, y como adaptador usaremos la opción --adapter_fasta y usaremos el archivo Referencia.fasta que tenemos en la carpeta del TallerGrupal_Ficheros. (se puede hacer por bucle uno a uno pero de momento no se como hacer esto en linux)
-
-fastp --in1 TallerGrupal_Ficheros/Fastqs/AbrahamSimpson_R1.fastq.gz --in2 TallerGrupal_Ficheros/Fastqs/AbrahamSimpson_R2.fastq.gz --out1 Trimmed/AbrahamSimpson_R1_filtered.fastq.gz --out2 Trimmed/AbrahamSimpson_R2_filtered.fastq.gz --adapter_fasta TallerGrupal_Ficheros/Referencia.fasta --cut_front --cut_tail --cut_window_size 12 --cut_mean_quality 20 --length_required 35 --json Trimmed/AbrahamSimpson.json --html Trimmed/AbrahamSimpson.html --thread 32
-fastp --in1 TallerGrupal_Ficheros/Fastqs/HomerSimpson_R1.fastq.gz --in2 TallerGrupal_Ficheros/Fastqs/HomerSimpson_R2.fastq.gz --out1 Trimmed/HomerSimpson_R1_filtered.fastq.gz --out2 Trimmed/HomerSimpson_R2_filtered.fastq.gz --adapter_fasta TallerGrupal_Ficheros/Referencia.fasta --cut_front --cut_tail --cut_window_size 12 --cut_mean_quality 20 --length_required 35 --json Trimmed/HomerSimpson.json --html Trimmed/HomerSimpson.html --thread 32
-fastp --in1 TallerGrupal_Ficheros/Fastqs/BartSimpson_R1.fastq.gz --in2 TallerGrupal_Ficheros/Fastqs/BartSimpson_R2.fastq.gz --out1 Trimmed/BartSimpson_R1_filtered.fastq.gz --out2 Trimmed/BartSimpson_R2_filtered.fastq.gz --adapter_fasta TallerGrupal_Ficheros/Referencia.fasta --cut_front --cut_tail --cut_window_size 12 --cut_mean_quality 20 --length_required 35 --json Trimmed/BartSimpson.json --html Trimmed/BartSimpson.html --thread 32
-fastp --in1 TallerGrupal_Ficheros/Fastqs/LisaSimpson_R1.fastq.gz --in2 TallerGrupal_Ficheros/Fastqs/LisaSimpson_R2.fastq.gz --out1 Trimmed/LisaSimpson_R1_filtered.fastq.gz --out2 Trimmed/LisaSimpson_R2_filtered.fastq.gz --adapter_fasta TallerGrupal_Ficheros/Referencia.fasta --cut_front --cut_tail --cut_window_size 12 --cut_mean_quality 20 --length_required 35 --json Trimmed/LisaSimpson.json --html Trimmed/LisaSimpson.html --thread 32
-fastp --in1 TallerGrupal_Ficheros/Fastqs/MaggieSimpson_R1.fastq.gz --in2 TallerGrupal_Ficheros/Fastqs/MaggieSimpson_R2.fastq.gz --out1 Trimmed/MaggieSimpson_R1_filtered.fastq.gz --out2 Trimmed/MaggieSimpson_R2_filtered.fastq.gz --adapter_fasta TallerGrupal_Ficheros/Referencia.fasta --cut_front --cut_tail --cut_window_size 12 --cut_mean_quality 20 --length_required 35 --json Trimmed/MaggieSimpson.json --html Trimmed/MaggieSimpson.html --thread 32
-
-### #7 Una vez tenemos los archivos filtrados mediante fastp, usamos de nuevo fastqc para guardar en Quality/Filtered/ los archivos filtrados.
-
-fastqc Trimmed/*fastq.gz -o Quality/Filtered/ --threads 32
-
-### #8 Ahora podemos usar multiqc para analizar todo lo que hemos estado haciendo hasta ahora en la carpeta en la que nos encontramos (mubio03_act2), incluyendo las carpetas que tenemos dentro de esta.
-
-multiqc .
-
-Hacer el salmon primero haciendo un index con el fasta de referencia (hacer carpetas out para cada cosa) y quant para con los archivos fastq obtenidos de fastp.
-
-En rseq2 fijarnos en el log2foldchange y el pvalor ajustado.
+## Estructura del Repositorio
+* `/data`: Archivos de conteo resultantes de Salmon (quant.sf).
+* `/scripts`: Código R utilizado para el análisis diferencial y generación de gráficas.
+* `/results`: Tablas de genes diferencialmente expresados (.csv) y gráficos generados.
