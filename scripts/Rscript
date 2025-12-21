@@ -1,0 +1,67 @@
+library(tximport)
+library(DESeq2)
+library(tidyverse)
+library(pheatmap)
+library(RColorBrewer)
+
+setwd("C:/Users/jose.celada/Desktop/analisis_rnaseq")
+
+samples <- data.frame(
+  sample = c("AbrahamSimpson", "HomerSimpson", "BartSimpson", "LisaSimpson", "MaggieSimpson"),
+  condition = c("Obeso", "Obeso", "Control", "Control", "Control")
+)
+
+rownames(samples) <- samples$sample
+
+files <- file.path("salmon_quant", paste0(samples$sample, "_quant"), "quant.sf")
+names(files) <- samples$sample
+
+if(all(file.exists(files))) {
+  print("Proscesando")
+} else {
+  stop("Error")
+}
+
+tx2gene <- read.table("Transcrito_a_Gen.tsv", header = FALSE)
+colnames(tx2gene) <- c("TXNAME", "GENEID")
+
+txi <- tximport(files, type = "salmon", tx2gene = tx2gene)
+
+dds <- DESeqDataSetFromTximport(txi, colData = samples, design = ~ condition)
+keep <- rowSums(counts(dds)) >= 10
+dds <- dds[keep,]
+dds <- DESeq(dds)
+
+res <- results(dds, contrast = c("condition", "Obeso", "Control"))
+resOrdered <- res[order(res$padj),]
+
+write.csv(as.data.frame(resOrdered), file = "resultados_genes_simpson.csv")
+
+print(" Genes de la Obesidad")
+print(head(resOrdered, 5))
+
+rld <- rlog(dds, blind=FALSE)
+
+
+plotPCA(rld, intgroup="condition") + 
+  ggtitle("PCA: Obesos vs Control") + 
+  theme_minimal()
+
+top20 <- rownames(resOrdered)[1:10]
+mat <- assay(rld)[top10, ]
+mat <- mat - rowMeans(mat) 
+
+pheatmap(mat, annotation_col = samples["condition"], 
+         main = "Top 10 Genes Diferenciales",
+         color = colorRampPalette(c("navy", "white", "firebrick3"))(50))
+
+res_df <- as.data.frame(resOrdered)
+res_df$Significativo <- res_df$padj < 0.05 & abs(res_df$log2FoldChange) > 1
+
+ggplot(res_df, aes(x = log2FoldChange, y = -log10(padj))) +
+  geom_point(aes(color = Significativo), alpha = 0.6) +
+  scale_color_manual(values = c("grey", "red")) +
+  theme_minimal() +
+  ggtitle("Volcano Plot: Genes de Obesidad") +
+  geom_vline(xintercept = c(-1, 1), linetype = "dashed") +
+  geom_hline(yintercept = -log10(0.05), linetype = "dashed")
